@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 Main();
 
@@ -12,7 +13,7 @@ void Main()
     MooseSays("H I, I'M  E N T H U S I A S T I C !");
     MooseSays("I really am enthusiastic");
 
-    // As a question
+    // Ask a question
     Questions();
 }
 
@@ -20,45 +21,39 @@ void Main()
 void Questions()
 {
 
-    bool isTrue = MooseAsks("Is Canada real?");
-    if (isTrue)
+    List<string> questions = new List<string>();
+    questions.Add("Is Canada real?"); // adding elements using add() method
+    questions.Add("Are you enthusiastic?");
+    questions.Add("Do you love C# yet?");
+    questions.Add("Do you want to know a secret?");
+
+    List<string> answers = new List<string>();
+    answers.Add("Really? It seems very unlikely.");
+    answers.Add("I  K N E W  I T !!!");
+    answers.Add("Yay!");
+    answers.Add("You should try it!");
+    answers.Add("Good job sucking up to your instructor!");
+    answers.Add("You will...oh, yes, you will...");
+    answers.Add("ME TOO!!!! I love secrets...tell me one!");
+    answers.Add("Oh, no...secrets are the best, I love to share them!");
+
+    int AnswerKey = 0;
+
+    foreach (string question in questions)
     {
-        MooseSays("Really? It seems very unlikely.");
-    }
-    else
-    {
-        MooseSays("I  K N E W  I T !!!");
+        bool isTrue = MooseAsks(question);
+        if (isTrue)
+        {
+            MooseSays(answers[AnswerKey]);
+        }
+        else
+        {
+            MooseSays(answers[AnswerKey + 1]);
+        }
+
+        AnswerKey = AnswerKey + 2;
     }
 
-    isTrue = MooseAsks("Are you enthusiastic?");
-    if (isTrue)
-    {
-        MooseSays("Yay!");
-    }
-    else
-    {
-        MooseSays("You should try it!");
-    }
-
-    isTrue = MooseAsks("Do you love C# yet?");
-    if (isTrue)
-    {
-        MooseSays("Good job sucking up to your instructor!");
-    }
-    else
-    {
-        MooseSays("You will...oh, yes, you will...");
-    }
-
-    isTrue = MooseAsks("Do you want to know a secret?");
-    if (isTrue)
-    {
-        MooseSays("ME TOO!!!! I love secrets...tell me one!");
-    }
-    else
-    {
-        MooseSays("Oh, no...secrets are the best, I love to share them!");
-    }
 }
 
 bool MooseAsks(string question)
