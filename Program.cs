@@ -19,14 +19,6 @@ void Main()
     Console.Write("Choice: ");
     string answer = Console.ReadLine();
 
-    if (answer != "1" || answer != "2" || answer != "3" || answer != "4")
-    {
-        Console.WriteLine();
-        Console.WriteLine("Invalid Choice! Please Choose again");
-        Console.Write("Choice: ");
-        answer = Console.ReadLine();
-    }
-
     if (answer == "1")
     {
         Questions();
@@ -51,81 +43,129 @@ void RockPaperScissors()
 
     int PlayerScore = 0;
     int CPUScore = 0;
+    bool noWinner = true;
 
-    Console.WriteLine("---------------------------");
-    Console.WriteLine($"|  Player: {PlayerScore}  |  CPU: {CPUScore}   |");
-    Console.WriteLine("---------------------------");
-    Console.WriteLine("|                         |");
-    Console.WriteLine("| 1. Rock                 |");
-    Console.WriteLine("| 2. Paper                |");
-    Console.WriteLine("| 3. Scissors             |");
-    Console.WriteLine("| 4. Exit                 |");
-    Console.WriteLine("---------------------------");
-    Console.WriteLine();
-    Console.Write("Choice: ");
-    string PlayerChoice = Console.ReadLine();
-
-    Random r = new Random();
-    int CpuChoice = r.Next(0, 2) + 1;
-
-    if (PlayerScore != 3 && CPUScore != 3)
+    while (noWinner)
     {
 
-        if (PlayerChoice == CpuChoice.ToString())
+        Console.WriteLine("---------------------------");
+        Console.WriteLine($"|  Player: {PlayerScore}  |  CPU: {CPUScore}   |");
+        Console.WriteLine("---------------------------");
+        Console.WriteLine("|                         |");
+        Console.WriteLine("| 1. Rock                 |");
+        Console.WriteLine("| 2. Paper                |");
+        Console.WriteLine("| 3. Scissors             |");
+        Console.WriteLine("|                         |");
+        Console.WriteLine("---------------------------");
+        Console.WriteLine();
+
+        if (PlayerScore == 3 || CPUScore == 3)
         {
-            if (PlayerChoice == "1")
-            {
-                Rock();
-            }
-            else if (PlayerChoice == "2")
-            {
-                Paper();
-            }
-            else if (PlayerChoice == "3")
-            {
-                Scissors();
-            }
+            Environment.Exit(-1);
+        }
+
+        Console.Write("Choice: ");
+        string PlayerChoice = Console.ReadLine();
+
+
+        Random r = new Random();
+        int generated = r.Next(0, 2) + 1;
+        string CpuChoice = generated.ToString();
+
+        if (PlayerChoice == CpuChoice)
+        {
+            ChoiceVisualGenerator(PlayerChoice);
             Console.WriteLine();
             Console.WriteLine("VS");
             Console.WriteLine();
-
+            ChoiceVisualGenerator(CpuChoice);
+            Console.WriteLine();
             Console.WriteLine("It's a TIE!");
         }
         else if (PlayerChoice == "1")
         {
-            Paper();
+            ChoiceVisualGenerator(PlayerChoice);
             Console.WriteLine();
             Console.WriteLine("VS");
             Console.WriteLine();
+            if (CpuChoice == "2")
+            {
+                ChoiceVisualGenerator(CpuChoice);
+                Console.WriteLine();
+                Console.WriteLine("YOU LOSE!");
+                ++CPUScore;
+            }
+            else
+            {
+                ChoiceVisualGenerator(CpuChoice);
+                Console.WriteLine();
+                Console.WriteLine("YOU WIN!");
+                ++PlayerScore;
+            }
+        }
+        else if (PlayerChoice == "2")
+        {
+            ChoiceVisualGenerator(PlayerChoice);
+            Console.WriteLine();
+            Console.WriteLine("VS");
+            Console.WriteLine();
+
+            if (CpuChoice == "1")
+            {
+                ChoiceVisualGenerator(CpuChoice);
+                Console.WriteLine();
+                Console.WriteLine("YOU WIN!");
+                ++PlayerScore;
+            }
+            else
+            {
+                ChoiceVisualGenerator(CpuChoice);
+                Console.WriteLine();
+                Console.WriteLine("YOU LOSE!");
+                ++CPUScore;
+            }
         }
         else if (PlayerChoice == "3")
         {
-            Scissors();
+            ChoiceVisualGenerator(PlayerChoice);
             Console.WriteLine();
             Console.WriteLine("VS");
             Console.WriteLine();
-        }
 
-        if (CpuChoice == 0)
-        {
-            Rock();
-        }
-        else if (CpuChoice == 1)
-        {
-            Paper();
-        }
-        else if (CpuChoice == 2)
-        {
-            Scissors();
+            if (CpuChoice == "1")
+            {
+                ChoiceVisualGenerator(CpuChoice);
+                Console.WriteLine();
+                Console.WriteLine("YOU LOSE!");
+                ++CPUScore;
+            }
+            else
+            {
+                ChoiceVisualGenerator(CpuChoice);
+                Console.WriteLine();
+                Console.WriteLine("YOU WIN!");
+                ++PlayerScore;
+            }
         }
     }
-    else
+
+
+}
+
+void ChoiceVisualGenerator(string choice)
+{
+    if (choice == "1")
     {
-
+        Rock();
     }
-
-
-
+    else if (choice == "2")
+    {
+        Paper();
+    }
+    else if (choice == "3")
+    {
+        Scissors();
+    }
 }
 
 void Rock()
