@@ -19,12 +19,15 @@ void Main()
     Console.Write("Choice: ");
     string answer = Console.ReadLine();
 
-    if (String.IsNullOrWhiteSpace(answer))
+    if (answer != "1" || answer != "2" || answer != "3" || answer != "4")
     {
+        Console.WriteLine();
         Console.WriteLine("Invalid Choice! Please Choose again");
         Console.Write("Choice: ");
+        answer = Console.ReadLine();
     }
-    else if (answer == "1")
+
+    if (answer == "1")
     {
         Questions();
     }
@@ -34,16 +37,131 @@ void Main()
     }
     else if (answer == "3")
     {
-
+        RockPaperScissors();
     }
     else if (answer == "4")
     {
         Environment.Exit(-1);
     }
 
-    // Ask a question
-    // Questions();
-    MagicMoose();
+}
+
+void RockPaperScissors()
+{
+
+    int PlayerScore = 0;
+    int CPUScore = 0;
+
+    Console.WriteLine("---------------------------");
+    Console.WriteLine($"|  Player: {PlayerScore}  |  CPU: {CPUScore}   |");
+    Console.WriteLine("---------------------------");
+    Console.WriteLine("|                         |");
+    Console.WriteLine("| 1. Rock                 |");
+    Console.WriteLine("| 2. Paper                |");
+    Console.WriteLine("| 3. Scissors             |");
+    Console.WriteLine("| 4. Exit                 |");
+    Console.WriteLine("---------------------------");
+    Console.WriteLine();
+    Console.Write("Choice: ");
+    string PlayerChoice = Console.ReadLine();
+
+    Random r = new Random();
+    int CpuChoice = r.Next(0, 2) + 1;
+
+    if (PlayerScore != 3 && CPUScore != 3)
+    {
+
+        if (PlayerChoice == CpuChoice.ToString())
+        {
+            if (PlayerChoice == "1")
+            {
+                Rock();
+            }
+            else if (PlayerChoice == "2")
+            {
+                Paper();
+            }
+            else if (PlayerChoice == "3")
+            {
+                Scissors();
+            }
+            Console.WriteLine();
+            Console.WriteLine("VS");
+            Console.WriteLine();
+
+            Console.WriteLine("It's a TIE!");
+        }
+        else if (PlayerChoice == "1")
+        {
+            Paper();
+            Console.WriteLine();
+            Console.WriteLine("VS");
+            Console.WriteLine();
+        }
+        else if (PlayerChoice == "3")
+        {
+            Scissors();
+            Console.WriteLine();
+            Console.WriteLine("VS");
+            Console.WriteLine();
+        }
+
+        if (CpuChoice == 0)
+        {
+            Rock();
+        }
+        else if (CpuChoice == 1)
+        {
+            Paper();
+        }
+        else if (CpuChoice == 2)
+        {
+            Scissors();
+        }
+    }
+    else
+    {
+
+    }
+
+
+
+}
+
+void Rock()
+{
+    Console.WriteLine(@"
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+");
+}
+
+void Paper()
+{
+    Console.WriteLine(@"
+     _______
+---'    ____)____
+           ______)
+          _______)
+         _______)
+---.__________)    
+    ");
+}
+
+void Scissors()
+{
+    Console.WriteLine(@"
+        _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+");
 }
 
 void MagicMoose()
